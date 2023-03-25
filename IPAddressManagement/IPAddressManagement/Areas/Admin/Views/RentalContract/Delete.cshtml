@@ -1,0 +1,35 @@
+﻿@using IPAddressManagement.Models;
+@model IPAddressManagement.Models.RentalContract
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+@using (Html.BeginForm("Delete", "RentalContract"))
+{
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            @Html.LabelFor(m=>m.Name)
+            @Html.TextBoxFor(m=>m.Name,new{@class="form-control"})
+            @Html.ValidationMessageFor(m=>m.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m=>m.StartDate)
+            @Html.TextBoxFor(m=>m.StartDate,new{@class="form-control"})
+            @Html.ValidationMessageFor(m=>m.StartDate)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m=>m.EndDate)
+            @Html.TextBoxFor(m=>m.EndDate,new{@class="form-control"})
+            @Html.ValidationMessageFor(m=>m.EndDate)
+        </div>
+        
+    </div>
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}

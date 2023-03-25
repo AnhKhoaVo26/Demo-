@@ -1,0 +1,84 @@
+﻿@using IPAddressManagement.Models;
+@model IEnumerable<IPAddressManagement.Models.GroupUser>;
+@{
+    ViewBag.Title = "Groups";
+}
+@section Scripts{
+    <script src="~/lib/bootbox.min.js"></script>
+    <script>
+        // handle click delete button event
+        $('#groupTable').on('click', 'a.btnDelete', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            bootbox.confirm("Bạn có chắc muốn xoá bản ghi này?", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/Admin/Groups/Delete",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "DELETE",
+                        success: function (response) {
+                            if (response.status === true) {
+                                window.location.reload();
+                            }
+                            else {
+                                console(response.message);
+                            }
+                        },
+                        error: function (err) {
+                            // set notification
+                            $("#showToast").html(
+                                '  <div id="toast-container" class="toast-top-right hide"> '
+                                + '     <div class= "toast toast-error" aria-live="polite" style="display: block;"> '
+                                + '         <div class="toast-message">Bạn không có quyền thực hiện thao tác này</div> '
+                                + '     </div> '
+                                + ' </div > ');
+                            setTimeout(function () {
+                                $("#showToast").empty();
+                            }, 3000);
+                        }
+                    });
+                }
+            })
+        });
+    </script>
+}
+
+<div class="car"></div>
+<div class="card mb-4">
+    
+    <div class="col-auto">     
+       
+    </div>
+    
+    <div class="card-header"><strong>Groups of user</strong><span class="small ms-1">all users</span></div>
+    <div class="card-body">
+        <p class="text-medium-emphasis small">Groups management</p>
+        <div>@Html.ActionLink("Add Group","Create","Groups", null, new {@class="btn btn-sm btn-success"})</div>
+        <div class="example">
+            <div class="tab-content rounded-bottom">
+                <table class="table" id="groupTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Group Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var group in Model)
+                        {
+                            <tr>
+                                <th scope="row">@group.ID_Group</th>
+                                <td>@group.Name</td>
+                                <td>@group.Decription</td>
+                                <td><a class="btn btn-sm btn-danger btnDelete" data-id="@group.ID_Group">Delete</a> @Html.ActionLink("Edit", "Edit", new{id=@group.ID_Group}, new {@class = "btn btn-sm btn-primary btnEdit"})</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

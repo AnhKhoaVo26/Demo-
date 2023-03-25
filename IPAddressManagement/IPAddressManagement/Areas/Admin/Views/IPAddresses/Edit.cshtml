@@ -1,0 +1,39 @@
+﻿@using IPAddressManagement.Areas.Admin.Models
+@model IPAddressManagement.Areas.Admin.Models.IPAddressViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>GroupUser</h4>
+<hr />
+@if (Model != null && Model.IPAddressName != null)
+{
+    @using (Html.BeginForm("Edit", "IPAddresses", new { id = Model.ID_IPAddress }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.IPAddressName)
+                @Html.TextBoxFor(m=>m.IPAddressName,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.IPAddressName)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Available)
+                @Html.CheckBoxFor(m=>m.Available)
+                @Html.ValidationMessageFor(m=>m.Available)
+                @Html.ValidationSummary(true)
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+    }
+}
+

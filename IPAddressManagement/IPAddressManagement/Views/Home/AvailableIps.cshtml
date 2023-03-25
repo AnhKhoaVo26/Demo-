@@ -1,0 +1,52 @@
+﻿@using IPAddressManagement.Models;
+@model IEnumerable<IPAddressManagement.Models.IPAddresss>;
+@{
+    ViewData["Title"] = "AvailableIP";
+}
+@section Scripts{
+    <script>
+        var ipTable = $('#ipTable').DataTable({});
+    </script>
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="card-body">
+    <p class="text-medium-emphasis">This is our available ip addresses</p>
+    <div class="example">
+        <div class="tab-content rounded-bottom">
+            <table class="table" id="ipTable">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">IPAddressName</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Choose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ip in Model)
+                    {
+                        <tr>
+                            <td>@ip.ID_IPAddress</td>
+                            <td>@ip.IPAddressName</td>
+                            @if (ip.Status == true)
+                            {
+                                <td>Khả dụng</td>
+                            }
+                            else
+                            {
+                                <td>Không khả dụng</td>
+                            }
+                            <td><a class="" data-id="@ip.ID_IPAddress">Liên hệ</a></td>
+                            <td><a class="" data-id="@ip.ID_IPAddress">Đăng ký</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

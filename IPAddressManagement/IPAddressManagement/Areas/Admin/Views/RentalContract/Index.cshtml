@@ -1,0 +1,50 @@
+﻿@using IPAddressManagement.Models;
+@model IEnumerable<IPAddressManagement.Models.RentalContract>;
+@{
+    ViewBag.Title = "Users management";
+}
+<div class="car"></div>
+<div class="card mb-4">
+
+    <div class="col-auto">
+        <button class="btn btn-ghost-secondary" type="button">@Html.ActionLink("Add Rental","Create","RentalContract")</button>
+
+    </div>
+
+    <div class="card-header"><strong>Customer</strong><span class="small ms-1">all customers</span></div>
+    <div class="card-body">
+        <p class="text-medium-emphasis small">Using the most basic table markup, here’s how <code>.table</code>-based tables look in Bootstrap.</p>
+        <div class="example">
+            <div class="tab-content rounded-bottom">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">StartDate</th>
+                            <th scope="col">EndDate</th>
+                           
+                            <th scope="col">Tool</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var rentalContract in Model)
+                        {
+                            <tr>
+                                <th scope="row">@rentalContract.ID_RentalContract</th>
+                                <td>@rentalContract.Name</td>
+                                <td>@rentalContract.StartDate</td>
+                                <td>@rentalContract.EndDate</td>
+                               
+                                <td>@Html.ActionLink("Delete","Delete",new{id=@rentalContract.ID_RentalContract})</td>
+                                <td>@Html.ActionLink("Edit","Edit",new{id=@rentalContract.ID_RentalContract})</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

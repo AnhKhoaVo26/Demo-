@@ -1,0 +1,71 @@
+﻿@using IPAddressManagement.Areas.Admin.Models;
+@model IPAddressManagement.Areas.Admin.Models.UserViewModel;
+
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.FirstName)
+                @Html.TextBoxFor(m=>m.FirstName,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.FirstName)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.LastName)
+                @Html.TextBoxFor(m=>m.LastName,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.LastName)
+                @Html.ValidationSummary(true)
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Email)
+                @Html.TextBoxFor(m=>m.Email,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.Email)
+                @Html.ValidationSummary(true)
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.NewPassWord)
+                @Html.TextBoxFor(m=>m.NewPassWord,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.NewPassWord)
+                @Html.ValidationSummary(true)
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.PhoneNumber)
+                @Html.TextBoxFor(m=>m.PhoneNumber,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.PhoneNumber)
+                @Html.ValidationSummary(true)
+
+            </div>
+            <div class="form-group">
+                <label>Group</label>
+                <select class="form-control" name="ID_Group" id="ID_Group">
+                    @foreach (var g in ViewBag.Groups)
+                    {
+                        <option value="@g.ID_Group">@g.Name</option>
+                    }
+                </select>
+            </div>
+
+            <hr />
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-sencondary" })
+            </div>
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,57 @@
+﻿@using IPAddressManagement.Models;
+@model IEnumerable<IPAddressManagement.Models.IPAddresss>;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+        <script>
+        var ipTable = $('#ipTable').DataTable({ });
+        </script>
+}
+<div class="car"></div>
+<div class="card mb-4">
+    <div class="col-auto">
+
+    </div>
+    <div class="card-header"><strong>Available Ips list</strong><span class="small ms-1">management</span></div>
+    <div class="card-body">
+        <p class="text-medium-emphasis small">Available Ips</p>
+        <div class="example">
+            <div class="tab-content rounded-bottom">
+                <table class="table" id="ipTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">IPAddressName</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">CreatedDate</th>
+                            <th scope="col">CreatedBy</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ip in Model)
+                        {
+                            <tr>
+                                <td>@ip.ID_IPAddress</td>
+                                <td>@ip.IPAddressName</td>
+                                @if (ip.Status == true)
+                                {
+                                    <td>Khả dụng</td>
+                                }
+                                else
+                                {
+                                    <td>Không khả dụng</td>
+                                }
+                                <td>@ip.CreatedDate</td>
+                                <td>@ip.CreatedBy</td>
+                                <td><a class="btn btn-sm btn-warning btnCreateContract" data-id="@ip.ID_IPAddress">Create Contract</a> </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

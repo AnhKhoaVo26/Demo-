@@ -1,0 +1,38 @@
+﻿@using IPAddressManagement.Areas.Admin.Models;
+@model IPAddressManagement.Areas.Admin.Models.IPAddressViewModel;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+<hr />
+@using (Html.BeginForm("Create", "IPAddresses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.IPAddressName)
+                @Html.TextBoxFor(m=>m.IPAddressName,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.IPAddressName)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Available)
+                @Html.CheckBoxFor(m=>m.Available)
+                @Html.ValidationMessageFor(m=>m.Available)
+                @Html.ValidationSummary(true)
+            </div>
+           
+            <hr />
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-sencondary" })
+            </div>
+        </div>
+    </div>
+}
+
+

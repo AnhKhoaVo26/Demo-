@@ -1,0 +1,44 @@
+﻿@using IPAddressManagement.Models;
+@model IPAddressManagement.Models.RentalContract
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<hr />
+@if (Model != null && Model.Name != null)
+{
+    @using (Html.BeginForm("Edit", "RentalContract", new { id = Model.ID_RentalContract }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Name)
+                @Html.TextBoxFor(m=>m.Name,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.Name)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.StartDate)
+                @Html.TextBoxFor(m=>m.StartDate,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.StartDate)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.EndDate)
+                @Html.TextBoxFor(m=>m.EndDate,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.EndDate)
+                @Html.ValidationSummary(true)
+            </div>
+            
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+    }
+}
