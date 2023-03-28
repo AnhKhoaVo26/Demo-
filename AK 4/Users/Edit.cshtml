@@ -1,0 +1,71 @@
+﻿@using IPAddressManagement.Areas.Admin.Models;
+@model IPAddressManagement.Areas.Admin.Models.UserViewModel;
+
+@{
+    ViewData["Title"] = "Edit User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+<h4>User</h4>
+<hr />
+@if (Model != null && Model.Email != null)
+{
+    @using (Html.BeginForm("Edit", "Users", new { id = Model.ID_User }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.FirstName)
+                @Html.TextBoxFor(m=>m.FirstName,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.FirstName)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.LastName)
+                @Html.TextBoxFor(m=>m.LastName,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.LastName)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.Email)
+                @Html.TextBoxFor(m=>m.Email,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.Email)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.NewPassWord)
+                @Html.TextBoxFor(m=>m.NewPassWord, new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.NewPassWord)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m=>m.PhoneNumber)
+                @Html.TextBoxFor(m=>m.PhoneNumber,new{@class="form-control"})
+                @Html.ValidationMessageFor(m=>m.PhoneNumber)
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                <label>Group</label>             
+                <select class="form-control" name="ID_Group" id="ID_Group">
+                    @foreach(var g in ViewBag.Groups)
+                    {
+                        if (Model.ID_Group != 0 && Model.ID_Group == g.ID_Group)
+                        {
+                            <option selected value="@g.ID_Group">@g.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@g.ID_Group">@g.Name</option>
+                        }
+                    }
+                </select>
+            </div>         
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+    }
+}
